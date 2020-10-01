@@ -1,0 +1,85 @@
+ #include<bits/stdc++.h>
+ typedef long long ll;
+using namespace std;ll mod=1e9+7;
+bool isValid(int board[10][10],int i,int j,int n)
+{
+    for(int k=0;k<n;k++)
+    {
+        if(board[i][k]==1)
+        return false;
+        if(board[k][j]==1)
+        return false;
+        
+    }
+    int k1=i;int k2=j;
+    while(k1>=0||k2>=0)
+    {
+      if(board[k1--][k2--]==1)
+      return false;
+    }
+    k1=i;k2=j;
+    while(k1<n||k2<n)
+    {
+      if(board[k1++][k2++]==1)
+      return false;
+    }
+    k1=i;k2=j;
+    for(k1=0;k1<n;k1++)
+    {
+        for(k2=0;k2<n;k2++)
+        {
+            if(k1+k2==i+j&&board[k1][k2]==1)
+            return false;
+            if(k1-k2==i-j&&board[k1][k2]==1)
+            return false;
+
+
+        }
+    }
+ 
+    return true;
+}
+bool nqueen(int board[10][10], int n,int q)
+{
+    if(q==0)
+    {
+        
+    return true;
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+        if(isValid(board,i,j,n)==false)
+        continue;
+        board[i][j]=1;
+        if (nqueen(board,n,q-1)==true)
+        return true;
+        board[i][j]=0;
+        }
+    }
+    return false;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int board[10][10];int q=n;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        board[i][j]=0;
+    }
+   if(nqueen(board,n,q)==false)
+   cout<<"Not possible"<<endl;
+   else
+   {
+       for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                cout<<board[i][j]<<" ";
+            }cout<<endl;
+        }
+   }
+}
