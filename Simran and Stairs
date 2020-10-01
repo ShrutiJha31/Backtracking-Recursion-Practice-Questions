@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+typedef long long ll;
+using namespace std;ll mod=1e9+7;
+int c=0;
+bool noofsteps(int i,int t)
+{
+if(i==t)
+{
+c++;
+return true;
+}
+if(i>t)
+return true;
+else
+{
+    noofsteps(i+1,t);
+    noofsteps(i+2,t);
+    noofsteps(i+3,t);
+}
+
+}
+int main()
+{
+    int n;
+    cin>>n;
+    noofsteps(0,n);
+    cout<<c;
+}
