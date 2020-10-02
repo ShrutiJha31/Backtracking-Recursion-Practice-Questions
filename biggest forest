@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+typedef long long ll;
+using namespace std;ll mod=1e9+7;vector<int>v;int sum=0;
+bool forest1(char forest[1000][1000],int i,int j,int n)
+{
+  if(i>=n||j>=n||i<0||j<0)
+  return true;
+  
+if(forest[i][j]=='T')
+{
+    sum++;
+    forest[i][j]='W';
+  forest1(forest,i+1,j,n);
+  forest1(forest,i,j+1,n);
+  forest1(forest,i-1,j,n);
+  forest1(forest,i,j-1,n);
+}
+}
+ 
+int main()
+{
+    int n;
+    cin>>n;
+    char forest[1000][1000];int max=0;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        cin>>forest[i][j];    
+    
+    }
+for(int i=0;i<n;i++)
+{
+    for(int j=0;j<n;j++)
+    {
+ 
+        if(forest[i][j]=='T')
+        {
+          
+   forest1(forest,i,j,n);
+   if(sum>max)
+   max=sum;
+   sum=0;
+    }
+    }
+
+}
+
+cout<<max;
+}
