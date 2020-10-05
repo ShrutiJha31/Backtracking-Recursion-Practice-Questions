@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool isValid(int sudo[9][9],int i,int j, int k)
+{
+    for(int i1=0;i1<9;i1++)
+    {
+        if(sudo[i1][j]==k)
+        return false;
+        if(sudo[i][i1]==k)
+        return false;
+    }
+    for(int i1=i-i%3;i<=i-(i%3)+2;i++)
+    {
+          for(int j1=j-j%3;j1<=j-(j%3)+2;j1++)
+          if(sudo[i1][j1]==k)
+          return false;
+    }
+    return true;
+}
+void display(int sudo[9][9])
+{
+    for(int i=0;i<9;i++)
+    {
+        for(int j=0;j<9;j++)
+        cout<<sudo[i][j]<<" ";
+        cout<<endl;
+        
+    }
+}
+bool solvesudo(int sudo[9][9],int i,int j)
+{
+    if(i==9||j==9)
+    return true;
+    for(int i=0;i<9;i++)
+    {
+        for(int j=0;j<9;j++)
+        {
+            if(sudo[i][j]==0)
+            {
+                for(int k=1;k<=9;k++)
+                {
+                    if(isValid(sudo,i,j,k)==false)
+                    continue;
+                    sudo[i][j]=k;
+                    if(solvesudo(sudo,i,j)==true)
+                    return true;
+                    sudo[i][j]=0;
+                }
+            }
+        }
+    }
+    display(sudo);
+}
+int main()
+{
+    int sudo[9][9];
+    cout<<"Enter 0 for blanked spaces";
+    for(int i=0;i<9;i++)
+    for(int j=0;j<9;j++)
+    cin>>sudo[i][j];
+    solvesudo(sudo,0,0);
+}
