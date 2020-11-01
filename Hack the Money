@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+ typedef long long ll;
+using namespace std;ll mod=1e9+7;
+bool check(ll a,ll b)
+{
+    if(a==b)
+    return true;
+   
+      //cout<<a<<" "<<b<<endl;
+        if(a<b)
+        {
+        if(check(a*10,b)==true)
+        return true;
+        
+        if(check(a*20,b)==true)
+        return true;
+        }
+        return false;
+     
+ 
+}
+int main()
+{
+    int t;
+    cin>>t;
+    for(int i=0;i<t;i++)
+    {
+        ll a;
+        cin>>a;
+        bool flag=check(1,a);
+        if(flag==true)
+        cout<<"Yes\n";
+        else
+        cout<<"No\n";
+    }
+}
